@@ -2,6 +2,9 @@ package testproject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import net.jodah.failsafe.internal.util.Assert;
+
 import org.openqa.selenium.JavascriptExecutor;
 
 
@@ -23,6 +26,7 @@ public class MainPage {
     private By SearchButtons2 = By.xpath("//*[@id='sports_main_new']/section[2]/div[1]/div[1]/div/div/button");
     private By PopUpSearch = By.className("v-modal-search");
     private By PopUpTitle = By.className("search-popup__title");
+    private By PopUpCaunetr= By.className("search-popup__text");
     private By PopUpSearchField = By.id("search-in-popup");
     private By PopUpTabMatches = By.cssSelector(".search-popup-tabs__header>button");
     private By PopUpTabLeagues = By.cssSelector(".search-popup-tabs__header>button+button");
@@ -66,7 +70,7 @@ public class MainPage {
 
     //CheckThatWebElemen
 
-    public MainPage popUpisDispalyed(){
+    public MainPage PopUpIsVisible(){
         driver.findElement(PopUpSearch).isDisplayed();
         return this;
     }
@@ -532,6 +536,23 @@ public class MainPage {
 
      public MainPage ClickOnPopUpClose(){
         driver.findElement(PopUpClose).click();
+        return this;
+     }
+
+     //GetSizeResults
+
+     public MainPage CheckCaunterOfSearchResults(){
+        int SumofResult = driver.findElements(SearchResults).size();
+        String Caunter = driver.findElement(PopUpCaunetr).getText();
+        int ResultsSum = Integer.valueOf(Caunter);
+        System.out.println(SumofResult);
+        System.out.println(ResultsSum);
+        Assert.isTrue(SumofResult==ResultsSum, "incorrect results");
+        return this;
+     }
+
+     public MainPage CheckValueofResults(String requset){
+        Assert.isTrue(driver.findElement(SearchResultsContentLeague).getText().toLowerCase().contains(requset)|driver.findElement(SearchResultsContentTeams).getText().toLowerCase().contains(requset), "incorrect results");
         return this;
      }
      

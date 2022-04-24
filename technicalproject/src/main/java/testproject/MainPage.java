@@ -75,251 +75,77 @@ public class MainPage {
         return this;
     }
 
-    public boolean isPopUpPresent() {
-        try {
-            driver.findElement(PopUpSearch);
-            return true;
-        } catch (org.openqa.selenium.NoSuchElementException e) {
-            return false;
-        }
-    }
-
-
     public boolean isPopUpVisible(){
         return driver.findElement(PopUpSearch).isDisplayed();
-    }
-
-    public boolean SearcFieldsArePresent(){
-        try {
-            driver.findElements(SearchFields);
-            return true;
-        } catch (org.openqa.selenium.NoSuchElementException e) {
-            return false;
-        }
     }
 
     public boolean SearchButtons2IsVisible(){
         return driver.findElement(SearchButtons2).isDisplayed();
     }
 
-    public boolean SearchButtons2IsPresent(){
-        try {
-            driver.findElements(SearchButtons2);
-            return true;
-        } catch (org.openqa.selenium.NoSuchElementException e) {
-            return false;
-        }
-    }
-
     public boolean SearchFields2IsVisible(){
         return driver.findElement(SearchFields2).isDisplayed();
-    }
-
-    public boolean SearchFields2IsPresent(){
-        try {
-            driver.findElements(SearchFields2);
-            return true;
-        } catch (org.openqa.selenium.NoSuchElementException e) {
-            return false;
-        }
     }
 
     public boolean SearchFiealdAreVisible(){
         return driver.findElement(SearchFields).isDisplayed();
     }
     
-
-    public boolean SearchButtonsArePresent(){
-        try {
-            driver.findElement(SearchButtons);
-            return true;
-        } catch (org.openqa.selenium.NoSuchElementException e) {
-            return false;
-        }
-    }
-
     public boolean SearchButtonsAreVisible(){
             return driver.findElement(SearchButtons).isDisplayed();
-    }
-
-    public boolean IsPopUpTitleIsPresent() {
-        try {
-            driver.findElement(PopUpTitle);
-            return true;
-        } catch (org.openqa.selenium.NoSuchElementException e) {
-            return false;
-        }
     }
 
     public boolean isPopUpTitleIsVisible(){
         return driver.findElement(PopUpTitle).isDisplayed();
     }
 
-    public boolean PopUpSearcFieldisPresent() {
-        try {
-            driver.findElement(PopUpSearchField);
-            return true;
-        } catch (org.openqa.selenium.NoSuchElementException e) {
-            return false;
-        }
-    }
-
     public boolean PopUpSearcFieldIsVisible(){
         return driver.findElement(PopUpSearchField).isDisplayed();
-    }
-
-    public boolean PopUpTabMatchesIsPresent() {
-        try {
-            driver.findElement(PopUpTabMatches);
-            return true;
-        } catch (org.openqa.selenium.NoSuchElementException e) {
-            return false;
-        }
     }
 
     public boolean PopUpTabMatchesIsVisible(){
         return driver.findElement(PopUpTabMatches).isDisplayed();
     }
 
-    public boolean PopUpTabLeaguesIsPresent() {
-        try {
-            driver.findElement(PopUpTabLeagues);
-            return true;
-        } catch (org.openqa.selenium.NoSuchElementException e) {
-            return false;
-        }
-    }
-
     public boolean PopUpTabLeaguesIsVisible(){
         return driver.findElement(PopUpTabLeagues).isDisplayed();
-    }
-
-
-    public boolean PopUpSearchButtonIsPresent(){
-        try {
-            driver.findElement(PopUpSearchButton);
-            return true;
-        } catch (org.openqa.selenium.NoSuchElementException e) {
-            return false;
-        }
     }
 
     public boolean PopUpSearchButtonIsVisible(){
         return driver.findElement(PopUpSearchButton).isDisplayed();
     }
 
-    public boolean PopUpCloseButtonisPresent(){
-        try {
-            driver.findElement(PopUpClose);
-            return true;
-        } catch (org.openqa.selenium.NoSuchElementException e) {
-            return false;
-        }
-    }
-
     public boolean PopUpCloseButtonIsVisible(){
         return driver.findElement(PopUpClose).isDisplayed();
-    }
-
-    public boolean PopUpClearButtonisPresent(){
-        try {
-            driver.findElement(PopUpClear);
-            return true;
-        } catch (org.openqa.selenium.NoSuchElementException e) {
-            return false;
-        }
     }
 
     public boolean PopUpClearButtonIsVisible(){
         return driver.findElement(PopUpClear).isDisplayed();
     }
 
-    public boolean PopUpCheckboxLivesPresent(){
-        try {
-            driver.findElement(PopUpCheckBoxLive);
-            return true;
-        } catch (org.openqa.selenium.NoSuchElementException e) {
-            return false;
-        }
-    }
-
     public boolean PopUpCheckboxLiveIsVisible(){
         return driver.findElement(PopUpCheckBoxLive).isDisplayed();
-    }
-
-    public boolean PopUpCheckboxLinesPresent(){
-        try {
-            driver.findElement(PopUpCheckBoxLine);
-            return true;
-        } catch (org.openqa.selenium.NoSuchElementException e) {
-            return false;
-        }
     }
 
     public boolean PopUpCheckboxLinesIsVisible(){
         return driver.findElement(PopUpCheckBoxLine).isDisplayed();
     }
 
-    public boolean PopUpCheckboxMatchIsPresent(){
-        try {
-            driver.findElement(PopUpCheckBoxExactMatch);
-            return true;
-        } catch (org.openqa.selenium.NoSuchElementException e) {
-            return false;
-        }
-    }
-
     public boolean PopUpCheckboxMatcIsVisible(){
         return driver.findElement(PopUpCheckBoxExactMatch).isDisplayed();
-    }
-
-    public boolean PopUpCheckboxNameLiveIsPresent(){
-        try {
-            driver.findElement(PopUpCheckBoxNameLive);
-            return true;
-        } catch (org.openqa.selenium.NoSuchElementException e) {
-            return false;
-        }
     }
 
     public boolean PopUpCheckboxNameLiveIsVisible(){
         return driver.findElement(PopUpCheckBoxNameLive).isDisplayed();
     }
 
-    public boolean PopUpCheckboxNameSportIsPresent(){
-        try {
-            driver.findElement(PopUpCheckBoxNameSport);
-            return true;
-        } catch (org.openqa.selenium.NoSuchElementException e) {
-            return false;
-        }
-    }
-
     public boolean PopUpCheckboxNameSportIsVisible(){
         return driver.findElement(PopUpCheckBoxNameSport).isDisplayed();
-    }
-
-    public boolean PopUpCheckboxNameMatchIsPresent(){
-        try {
-            driver.findElement(PopUpCheckBoxNameExactMatch);
-            return true;
-        } catch (org.openqa.selenium.NoSuchElementException e) {
-            return false;
-        }
     }
 
     public boolean PopUpCheckboxNameMatchIsVisible(){
         return driver.findElement(PopUpCheckBoxNameExactMatch).isDisplayed();
     }
-
-    public boolean PopUpMicrophoneButtonIsPresent(){
-        try {
-            driver.findElement(PopUpMicrophoneButton);
-            return true;
-        } catch (org.openqa.selenium.NoSuchElementException e) {
-            return false;
-        }
-    }  
 
     public boolean PopUpMicrophoneButtonIsVisible(){
         return driver.findElement(PopUpMicrophoneButton).isDisplayed();
@@ -330,169 +156,52 @@ public class MainPage {
          return this;
      }
 
-    public boolean PopUpMicrophoneAlertIconIsPresent(){
-        try {
-            driver.findElement(MicrophoneAlertIcon);
-            return true;
-        } catch (org.openqa.selenium.NoSuchElementException e) {
-            return false;
-        }
-    }
-
     public boolean PopUpMicrophoneAlertIconIsVisible(){
         return driver.findElement(MicrophoneAlertIcon).isDisplayed();
-    }
-
-    public boolean PopUpMicrophoneAlertContentIsPresent(){
-        try {
-            driver.findElement(MicrophoneAlertContent);
-            return true;
-        } catch (org.openqa.selenium.NoSuchElementException e) {
-            return false;
-        }
     }
 
     public boolean PopUpMicrophoneAlertContentIsVisible(){
         return driver.findElement(MicrophoneAlertContent).isDisplayed();
     }
 
-    public boolean PopUpMicrophoneAlertButtomIsPresent(){
-        try {
-            driver.findElement(MicrophoneAlertButton);
-            return true;
-        } catch (org.openqa.selenium.NoSuchElementException e) {
-            return false;
-        }
-    }
-
     public boolean PopUpMicrophoneAlertButtonIsVisible(){
         return driver.findElement(MicrophoneAlertButton).isDisplayed();
-    }
-
-    public boolean PopUpSearchResultsArePresent(){
-        try {
-            driver.findElement(SearchResults);
-            return true;
-        } catch (org.openqa.selenium.NoSuchElementException e) {
-            return false;
-        }
     }
 
     public boolean PopUpSearchResultsAreVisible(){
         return driver.findElement(SearchResults).isDisplayed();
     }
 
-    public boolean PopUpSearchResultsContentArePresent(){
-        try {
-            driver.findElement(SearchResultsContent);
-            return true;
-        } catch (org.openqa.selenium.NoSuchElementException e) {
-            return false;
-        }
-    }
-
     public boolean PopUpSearchResultsContentAreVisible(){
         return driver.findElement(SearchResultsContent).isDisplayed();
-    }
-
-    public boolean PopUpIconLiveinResultsArePresent(){
-        try {
-            driver.findElement(IconLiveinResults);
-            return true;
-        } catch (org.openqa.selenium.NoSuchElementException e) {
-            return false;
-        }
     }
 
     public boolean PopUpIconLiveinResultsAreVisible(){
         return driver.findElement(IconLiveinResults).isDisplayed();
     }
 
-    public boolean PopUpSearchResultsHeadersArePresent(){
-        try {
-            driver.findElement(SearchResultsHeaders);
-            return true;
-        } catch (org.openqa.selenium.NoSuchElementException e) {
-            return false;
-        }
-    }
-
     public boolean PopUpSearchResultsHeadersAreVisible(){
         return driver.findElement(SearchResultsHeaders).isDisplayed();
-    }
-
-    public boolean PopUpSearchResultsContentLeagueArePresent(){
-        try {
-            driver.findElement(SearchResultsContentLeague);
-            return true;
-        } catch (org.openqa.selenium.NoSuchElementException e) {
-            return false;
-        }
     }
 
     public boolean PopUpSearchResultsContentLeagueAreVisible(){
         return driver.findElement(SearchResultsHeaders).isDisplayed();
     }
 
-    public boolean PopUpSearchResultsContentTeamsArePresent(){
-        try {
-            driver.findElement(SearchResultsContentTeams);
-            return true;
-        } catch (org.openqa.selenium.NoSuchElementException e) {
-            return false;
-        }
-    }
-
     public boolean PopUpSearchResultsContentTeamsAreVisible(){
         return driver.findElement(SearchResultsContentTeams).isDisplayed();
-    }
-
-    public boolean PopUpCoefeOneArePresent(){
-        try {
-            driver.findElement(CoefeOne);
-            return true;
-        } catch (org.openqa.selenium.NoSuchElementException e) {
-            return false;
-        }
     }
 
     public boolean PopUpCoefeOneAreVisible(){
         return driver.findElement(CoefeOne).isDisplayed();
     }
 
-    public boolean PopUpCoefeXArePresent(){
-        try {
-            driver.findElement(CoefeX);
-            return true;
-        } catch (org.openqa.selenium.NoSuchElementException e) {
-            return false;
-        }
-    }
-
     public boolean PopUpCoefeXAreVisible(){
         return driver.findElement(CoefeX).isDisplayed();
     }
 
-    public boolean PopUpCoefTwoArePresent(){
-        try {
-            driver.findElement(CoefeTwo);
-            return true;
-        } catch (org.openqa.selenium.NoSuchElementException e) {
-            return false;
-        }
-    }
-
     public boolean PopUpCoefeTwoAreVisible(){
         return driver.findElement(CoefeTwo).isDisplayed();
-    }
-
-    public boolean PopUpValueOfCoefArePresent(){
-        try {
-            driver.findElement(ValueOfCoef);
-            return true;
-        } catch (org.openqa.selenium.NoSuchElementException e) {
-            return false;
-        }
     }
 
     public boolean PopUpValueOfCoefAreVisible(){

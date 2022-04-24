@@ -32,16 +32,13 @@ public class MainPageTest {
     public void EnterRequsetOnTheSearchFieldTest(){
         mainPage.enterRequest("footbal");
         mainPage.clickButtonSearch();
-        mainPage.isPopUpPresent();
         mainPage.isPopUpVisible();
     }
     
 
     @Test (description = "Проверяю, что на странице присутсвуют 2 поля ввода поиска, и 2 кнопки активации поиска")
     public void PageHasSearchFieldsAndButtonsTest(){
-        mainPage.SearcFieldsArePresent();
         mainPage.SearchFiealdAreVisible();
-        mainPage.SearchButtonsArePresent();
         mainPage.SearchButtonsAreVisible();
     }
 
@@ -49,49 +46,27 @@ public class MainPageTest {
     public void PopUPHasAllWebElementsTest(){
         mainPage.enterRequest("football");
         mainPage.clickButtonSearch();
-        mainPage.isPopUpPresent();
         mainPage.isPopUpVisible();
-        mainPage.IsPopUpTitleIsPresent();
         mainPage.isPopUpTitleIsVisible();
-        mainPage.PopUpCheckboxLinesPresent();
         mainPage.PopUpCheckboxLinesIsVisible();
-        mainPage.PopUpCheckboxLivesPresent();
         mainPage.PopUpCheckboxLiveIsVisible();
-        mainPage.PopUpCheckboxMatchIsPresent();
         mainPage.PopUpCheckboxMatcIsVisible();
-        mainPage.PopUpCheckboxNameLiveIsPresent();
         mainPage.PopUpCheckboxNameLiveIsVisible();
-        mainPage.PopUpCheckboxNameMatchIsPresent();
         mainPage.PopUpCheckboxNameMatchIsVisible();
-        mainPage.PopUpCheckboxNameSportIsPresent();
         mainPage.PopUpCheckboxNameSportIsVisible();
-        mainPage.PopUpClearButtonisPresent();
         mainPage.PopUpClearButtonIsVisible();
-        mainPage.PopUpCloseButtonisPresent();
         mainPage.PopUpCloseButtonIsVisible();
-        mainPage.PopUpMicrophoneButtonIsPresent();
         mainPage.PopUpMicrophoneButtonIsVisible();
-        mainPage.PopUpSearcFieldisPresent();
         mainPage.PopUpSearcFieldIsVisible();
-        mainPage.PopUpSearchButtonIsPresent();
         mainPage.PopUpSearchButtonIsVisible();
-        mainPage.PopUpTabLeaguesIsPresent();
         mainPage.PopUpTabLeaguesIsVisible();
-        mainPage.PopUpTabMatchesIsPresent();
         mainPage.PopUpTabMatchesIsVisible();
-        mainPage.PopUpCoefeOneArePresent();
         mainPage.PopUpCoefeOneAreVisible();
         mainPage.PopUpCoefeTwoAreVisible();
-        mainPage.PopUpCoefTwoArePresent();
-        mainPage.PopUpCoefeXArePresent();
         mainPage.PopUpCoefeXAreVisible();
-        mainPage.PopUpIconLiveinResultsArePresent();
         mainPage.PopUpIconLiveinResultsAreVisible();
-        mainPage.PopUpSearchResultsArePresent();
         mainPage.PopUpSearchResultsAreVisible();
-        mainPage.PopUpSearchResultsContentArePresent();
         mainPage.PopUpSearchResultsContentAreVisible();
-        mainPage.PopUpValueOfCoefArePresent();
         mainPage.PopUpValueOfCoefAreVisible();
     }
 
@@ -100,45 +75,25 @@ public class MainPageTest {
         mainPage.enterRequest("basketball");
         mainPage.clickButtonSearch();
         mainPage.ClickPopUpTabMatches();
-        mainPage.PopUpIconLiveinResultsArePresent();
         mainPage.PopUpIconLiveinResultsAreVisible();
-        mainPage.PopUpSearchResultsArePresent();
         mainPage.PopUpSearchResultsAreVisible();
-        mainPage.PopUpSearchResultsContentArePresent();
         mainPage.PopUpSearchResultsContentAreVisible();
-        mainPage.PopUpCheckboxLinesPresent();
         mainPage.PopUpCheckboxLinesIsVisible();
-        mainPage.PopUpCheckboxLivesPresent();
         mainPage.PopUpCheckboxLiveIsVisible();
-        mainPage.PopUpCheckboxMatchIsPresent();
         mainPage.PopUpCheckboxMatcIsVisible();
-        mainPage.PopUpCheckboxNameLiveIsPresent();
         mainPage.PopUpCheckboxNameLiveIsVisible();
-        mainPage.PopUpCheckboxNameMatchIsPresent();
         mainPage.PopUpCheckboxNameMatchIsVisible();
-        mainPage.PopUpCheckboxNameSportIsPresent();
         mainPage.PopUpCheckboxNameSportIsVisible();
-        mainPage.PopUpClearButtonisPresent();
         mainPage.PopUpClearButtonIsVisible();
-        mainPage.PopUpCloseButtonisPresent();
         mainPage.PopUpCloseButtonIsVisible();
-        mainPage.PopUpMicrophoneButtonIsPresent();
         mainPage.PopUpMicrophoneButtonIsVisible();
-        mainPage.PopUpSearcFieldisPresent();
         mainPage.PopUpSearcFieldIsVisible();
-        mainPage.PopUpSearchButtonIsPresent();
         mainPage.PopUpSearchButtonIsVisible();
-        mainPage.PopUpTabLeaguesIsPresent();
         mainPage.PopUpTabLeaguesIsVisible();
-        mainPage.PopUpTabMatchesIsPresent();
         mainPage.PopUpTabMatchesIsVisible();
-        mainPage.PopUpValueOfCoefArePresent();
         mainPage.PopUpValueOfCoefAreVisible();
-        mainPage.PopUpCoefeOneArePresent();
         mainPage.PopUpCoefeOneAreVisible(); 
         mainPage.PopUpCoefeTwoAreVisible();
-        mainPage.PopUpCoefTwoArePresent();
-        mainPage.PopUpCoefeXArePresent();
         mainPage.PopUpCoefeXAreVisible();
     }
 

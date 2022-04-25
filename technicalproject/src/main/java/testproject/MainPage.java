@@ -1,17 +1,23 @@
 package testproject;
+
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import java.time.Duration;
 
 import net.jodah.failsafe.internal.util.Assert;
-
 import org.openqa.selenium.JavascriptExecutor;
+
 
 
 
 public class MainPage {
     
     WebDriver driver;
+    
+    
 
     public MainPage(WebDriver driver){
         this.driver = driver;
@@ -53,16 +59,24 @@ public class MainPage {
     private By MicrophoneAlertIcon = By.cssSelector(".swal2-popup>.swal2-header");
     private By MicrophoneAlertContent = By.cssSelector("..swal2-popup>.swal2-content");
     private By MicrophoneAlertButton = By.cssSelector(".swal2-popup>.swal2-actions>.swal2-confirm");
+    private By NoSurchResults = By.className("search-popup__nothing-find");
 
 
     
 
-    public MainPage enterRequest(String email){
-        driver.findElement(SearchFields1).sendKeys(email);
+    public MainPage enterRequest(String request){
+        driver.findElement(SearchFields1).sendKeys(request);
         return this;
     }
 
-    public MainPage clickButtonSearch(){
+    public MainPage FillPopUpSearcField(String request){
+        driver.findElement(PopUpSearchField).sendKeys(request);
+        return this;
+    }
+
+
+
+    public MainPage ClickButtonSearch(){
        driver.findElement(SearchButtons1).click();
        return this;
     }
@@ -208,6 +222,11 @@ public class MainPage {
         return driver.findElement(ValueOfCoef).isDisplayed();
     }
 
+    public boolean CheckNoSurchResultsTextisVisible(){
+        return driver.findElement(NoSurchResults).isDisplayed();
+    }
+
+
 
     //ClickonTheWebElement
 
@@ -219,7 +238,9 @@ public class MainPage {
      }
 
      public MainPage ClickPopUpTabLeagues(){
-        driver.findElement(PopUpTabLeagues).click();
+        JavascriptExecutor js = (JavascriptExecutor)driver;
+        WebElement button = driver.findElement(By.cssSelector(".search-popup-tabs__header>button"));
+        js.executeScript("arguments[0].click();", button);
         return this;
      }
 
@@ -228,8 +249,13 @@ public class MainPage {
         return this;
      }
 
-     public MainPage ClickOnCheckBoxLine(){
+     public MainPage ClickOnCheckBoxSports(){
         driver.findElement(PopUpCheckBoxLine).click();
+        return this;
+     }
+
+     public MainPage ClickOnPopUpSearchField(){
+        driver.findElement(PopUpSearchField).click();
         return this;
      }
 
@@ -248,6 +274,16 @@ public class MainPage {
         return this;
      }
 
+     public MainPage ClickOnPopUpClearButton(){
+        driver.findElement(PopUpClear).click();
+        return this;
+     }
+
+     public MainPage ClickOnPopUpSearchButton(){
+        driver.findElement(PopUpSearchButton).click();
+        return this;
+     }
+
      //GetSizeResults
 
      public MainPage CheckCaunterOfSearchResults(){
@@ -260,12 +296,40 @@ public class MainPage {
         return this;
      }
 
+     //Get results value and compare it with request
+
      public MainPage CheckValueofResults(String requset){
         Assert.isTrue(driver.findElement(SearchResultsContentLeague).getText().toLowerCase().contains(requset)|driver.findElement(SearchResultsContentTeams).getText().toLowerCase().contains(requset), "incorrect results");
         return this;
      }
+
+     public MainPage CheckValueofResultsInLegaues(String requset){
+        Assert.isTrue(driver.findElement(SearchResultsContentLeague).getText().toLowerCase().contains(requset), "incorrect results");
+        return this;
+     }
+
      
-   
+     //Проверяю что дефолтный каунтер равен 0
+     public MainPage CheckCaunterOfSearchResultsWithInCorrectRequest(){
+        String Caunter = driver.findElement(PopUpCaunetr).getText();
+        int ResultsSum = Integer.valueOf(Caunter);
+        int DefaultCaunter = 0;
+        System.out.println(ResultsSum);
+        Assert.isTrue(DefaultCaunter==ResultsSum, "incorrect caunter");
+        return this;
+     }
+
+     //Задаю ожидание в несколько секунд, для того чтобы данные поп-ап корректно подтягулись
+     public MainPage GetWait(){
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return this;
+     }
+
+
 
 
 

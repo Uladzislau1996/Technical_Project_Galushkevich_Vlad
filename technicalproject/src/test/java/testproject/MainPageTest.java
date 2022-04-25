@@ -1,7 +1,7 @@
 package testproject;
 
 import java.time.Duration;
-
+import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
@@ -31,7 +31,7 @@ public class MainPageTest {
     @Test (description = "Проверяю, что при вводе запроса открывается Попап")       
     public void EnterRequsetOnTheSearchFieldTest(){
         mainPage.enterRequest("footbal");
-        mainPage.clickButtonSearch();
+        mainPage.ClickButtonSearch();
         mainPage.isPopUpVisible();
     }
     
@@ -45,7 +45,7 @@ public class MainPageTest {
     @Test (description = "Проверяю, что Попа, содержит все элементы, если открыт дефолтный таб MATCHES")      
     public void PopUPHasAllWebElementsTest(){
         mainPage.enterRequest("football");
-        mainPage.clickButtonSearch();
+        mainPage.ClickButtonSearch();
         mainPage.isPopUpVisible();
         mainPage.isPopUpTitleIsVisible();
         mainPage.PopUpCheckboxLinesIsVisible();
@@ -73,7 +73,7 @@ public class MainPageTest {
     @Test (expectedExceptions = org.openqa.selenium.NoSuchElementException.class, description = "Проверяю, что Попа, содержит все элементы, если открыт дефолтный таб League. Тест спецом фейлиться так как тут есть проверки что, есть кэфы, когда здесь их не должно быть")  
     public void PopUpTabsHasResultsTest(){
         mainPage.enterRequest("basketball");
-        mainPage.clickButtonSearch();
+        mainPage.ClickButtonSearch();
         mainPage.ClickPopUpTabMatches();
         mainPage.PopUpIconLiveinResultsAreVisible();
         mainPage.PopUpSearchResultsAreVisible();
@@ -100,14 +100,14 @@ public class MainPageTest {
     @Test (description = "Проверяю, что Каунтер в поп-апе соответсвует, найденному кол-ву результатов")
     public void CheckPopUpCaunterTest(){
         mainPage.enterRequest("football");
-        mainPage.clickButtonSearch();
+        mainPage.ClickButtonSearch();
         mainPage.CheckCaunterOfSearchResults();
     }
 
-    @Test (description = "Проверяю, что в резултатах по запросу есть совпадение в тексте в ТАБ MATCHES>блоке TEAMS")
+    @Test (description = "Проверяю, что в резултатах по запросу есть совпадение в тексте в ТАБ MATCHES>блоке LEGAUE")
     public void CheckPopUpResultsInTeamsTest(){
         mainPage.enterRequest("Football");
-        mainPage.clickButtonSearch();
+        mainPage.ClickButtonSearch();
         mainPage.CheckCaunterOfSearchResults();
         mainPage.CheckValueofResults("football");
     }
@@ -115,27 +115,190 @@ public class MainPageTest {
     @Test (description = "Проверяю, что в резултатах по запросу есть совпадение в тексте в ТАБ MATCHES>блоке TEAMS")
     public void CheckPopUpResultsInLeagueTest(){
         mainPage.enterRequest("Arsenal");
-        mainPage.clickButtonSearch();
+        mainPage.ClickButtonSearch();
         mainPage.CheckCaunterOfSearchResults();
         mainPage.CheckValueofResults("arsenal");
     }
 
-    @Test (description = "Проверяю, что в резултатах по запросу есть совпадение в тексте в ТАБ Legaues>блоке TEAMS")
+    @Test (description = "Проверяю, что в резултатах по запросу есть совпадение в тексте в ТАБ Legaues>блоке LAGAUE")
     public void CheckPopUpResultsInTeamTabTest(){
         mainPage.enterRequest("Basketball");
-        mainPage.clickButtonSearch();
+        mainPage.ClickButtonSearch();
         mainPage.CheckCaunterOfSearchResults();
         mainPage.ClickPopUpTabLeagues();
-        mainPage.CheckValueofResults("basketball");
+        mainPage.CheckValueofResultsInLegaues("basketball");
     }
 
-    @Test (description = "Проверяю, что в резултатах по запросу есть совпадение в тексте в ТАБ Legaues>блоке TEAMS")
+    @Test (description = "Проверяю, что в резултатах по запросу есть совпадение в тексте в ТАБ Legaues>блоке LAGAUE")
     public void CheckPopUpResultsInLeagueTabTest(){
         mainPage.enterRequest("League");
-        mainPage.clickButtonSearch();
+        mainPage.ClickButtonSearch();
         mainPage.CheckCaunterOfSearchResults();
         mainPage.ClickPopUpTabLeagues();
-        mainPage.CheckValueofResults("league");
+        mainPage.CheckValueofResultsInLegaues("league");
+    }
+
+    @Test (description = "Проверяю, что отображается заглушка если нет результатов в табе LEGAUES/MATCHES")
+    public void CheckTextStubTestWithInvalidRequestTest(){
+        mainPage.enterRequest("Test123QA");
+        mainPage.ClickButtonSearch();
+        mainPage.CheckCaunterOfSearchResultsWithInCorrectRequest();
+        mainPage.CheckNoSurchResultsTextisVisible();
+        mainPage.ClickPopUpTabLeagues();
+        mainPage.CheckNoSurchResultsTextisVisible();
+        mainPage.CheckCaunterOfSearchResultsWithInCorrectRequest();
+    }
+
+    @Test (description = "Проверяю, что при включенном чекбоксе 'Live' всегда отображается ячейка напротив результатов")
+    public void LiveCheckBoxTEst(){
+        mainPage.enterRequest("Footbal");
+        mainPage.ClickButtonSearch();
+        mainPage.PopUpIconLiveinResultsAreVisible();
+        mainPage.ClickPopUpTabLeagues();
+        mainPage.GetWait();
+        mainPage.PopUpIconLiveinResultsAreVisible();
+    }    
+
+    @Test (description = "Проверяю, что подтягиваются результаты поиска если включенны все чекбоксы 'Live/Sports/Exact match' всегда отображается ячейка напротив результатов")
+    public void CheckResultsWithAllCheckBoxesTest(){
+        mainPage.enterRequest("Footbal");
+        mainPage.ClickButtonSearch();
+        mainPage.GetWait();
+        mainPage.ClickCheckBoxExactMatch();
+        mainPage.CheckCaunterOfSearchResults();
+        mainPage.PopUpValueOfCoefAreVisible();
+        mainPage.PopUpCoefeOneAreVisible(); 
+        mainPage.PopUpCoefeTwoAreVisible();
+        mainPage.PopUpCoefeXAreVisible();
+        mainPage.CheckValueofResults("football");
+        mainPage.ClickPopUpTabLeagues();
+        mainPage.GetWait();
+        mainPage.CheckCaunterOfSearchResults();
+        mainPage.CheckValueofResultsInLegaues("footbal");
+    }    
+
+    @Test (description = "Проверяю, что подтягиваются результаты поиска если включенны все чекбоксы 'Sports/Exact match' всегда отображается ячейка напротив результатов")
+    public void CheckResultsWithSportandExactmatchCheckBoxesTest(){
+        mainPage.enterRequest("Footbal");
+        mainPage.ClickButtonSearch();
+        mainPage.GetWait();
+        mainPage.ClickCheckBoxExactMatch();
+        mainPage.ClickOnCheckBoxLive();
+        mainPage.GetWait();
+        mainPage.CheckCaunterOfSearchResults();
+        mainPage.PopUpValueOfCoefAreVisible();
+        mainPage.PopUpCoefeOneAreVisible(); 
+        mainPage.PopUpCoefeTwoAreVisible();
+        mainPage.PopUpCoefeXAreVisible();
+        mainPage.CheckValueofResults("football");
+        mainPage.ClickPopUpTabLeagues();
+        mainPage.GetWait();
+        mainPage.CheckCaunterOfSearchResults();
+        mainPage.CheckValueofResultsInLegaues("footbal");
+        
+    } 
+
+    @Test (expectedExceptions = org.openqa.selenium.NoSuchElementException.class, description = "Проверяю, что подтягиваются результаты поиска если включенны все чекбоксы 'Sports/Exact match' и что нет текстовки Live в табе MATCHES")
+    public void CheckResultsWithoutLiveCheckBoxTest(){
+        mainPage.enterRequest("Footbal");
+        mainPage.ClickButtonSearch();
+        mainPage.GetWait();
+        mainPage.ClickCheckBoxExactMatch();
+        mainPage.ClickOnCheckBoxLive();
+        mainPage.CheckCaunterOfSearchResults();
+        mainPage.PopUpValueOfCoefAreVisible();
+        mainPage.PopUpCoefeOneAreVisible(); 
+        mainPage.PopUpCoefeTwoAreVisible();
+        mainPage.PopUpCoefeXAreVisible();
+        mainPage.CheckValueofResults("football");
+        mainPage.GetWait();
+        mainPage.PopUpIconLiveinResultsAreVisible();
+    }
+
+    @Test (expectedExceptions = org.openqa.selenium.NoSuchElementException.class, description = "Проверяю, что подтягиваются результаты поиска если включенны все чекбоксы 'Sports/Exact match' и что нет текстовки Live в табе LEGAUES")
+    public void CheckResultsWithoutLiveCheckBoxLegauesTest(){
+        mainPage.enterRequest("Footbal");
+        mainPage.ClickButtonSearch();
+        mainPage.GetWait();
+        mainPage.ClickCheckBoxExactMatch();
+        mainPage.ClickOnCheckBoxLive();
+        mainPage.ClickPopUpTabLeagues();
+        mainPage.GetWait();
+        mainPage.CheckValueofResults("football");
+        mainPage.PopUpIconLiveinResultsAreVisible();
+    }
+
+    @Test (description = "Проверяю, работу кнопки удалить текст в табе MATCHES")
+    public void CheckDeleteRequestButtonTest(){
+        mainPage.enterRequest("Footbal");
+        mainPage.ClickButtonSearch();
+        mainPage.GetWait();
+        mainPage.ClickOnPopUpClearButton();
+        mainPage.ClickOnPopUpSearchButton();
+        mainPage.GetWait();
+        mainPage.CheckCaunterOfSearchResultsWithInCorrectRequest();
+        mainPage.CheckNoSurchResultsTextisVisible();
+        mainPage.ClickPopUpTabLeagues();
+        mainPage.GetWait();
+        mainPage.CheckCaunterOfSearchResultsWithInCorrectRequest();
+        mainPage.CheckNoSurchResultsTextisVisible();
+    }
+
+    @Test (description = "Проверяю, работу кнопки удалить текст в табе LEGAUES")
+    public void CheckDeleteRequestButtonLegauesTest(){
+        mainPage.enterRequest("Footbal");
+        mainPage.ClickButtonSearch();
+        mainPage.ClickPopUpTabLeagues();
+        mainPage.ClickOnPopUpClearButton();
+        mainPage.ClickOnPopUpSearchButton();
+        mainPage.GetWait();
+        mainPage.CheckCaunterOfSearchResultsWithInCorrectRequest();
+        mainPage.CheckNoSurchResultsTextisVisible();
+    }
+
+    @Test (description = "Проверяю, работу кнопки поиска в PopUp текст в табе MATCHES")
+    public void CheckPopUpSearcButtonTest(){
+        mainPage.enterRequest("Footbal");
+        mainPage.ClickButtonSearch();
+        mainPage.GetWait();
+        mainPage.ClickOnPopUpClearButton();
+        mainPage.GetWait();
+        mainPage.ClickOnPopUpSearchField();
+        mainPage.FillPopUpSearcField("Basketball");
+        mainPage.ClickOnPopUpSearchButton();
+        mainPage.GetWait();
+        mainPage.CheckCaunterOfSearchResults();
+        mainPage.CheckValueofResults("basketball");
+        mainPage.GetWait();
+        mainPage.ClickOnPopUpClearButton();
+        mainPage.FillPopUpSearcField("Baseball");
+        mainPage.ClickOnPopUpSearchButton();
+        mainPage.GetWait();
+        mainPage.CheckCaunterOfSearchResults();
+        mainPage.CheckValueofResults("baseball");
+    }
+
+    @Test (description = "Проверяю, работу кнопки удалить текст в табе LEGAUES")
+    public void CheckPopUpSearcButtonLegauesTest(){
+        mainPage.enterRequest("Footbal");
+        mainPage.ClickButtonSearch();
+        mainPage.ClickPopUpTabLeagues();
+        mainPage.ClickOnPopUpClearButton();
+        mainPage.GetWait();
+        mainPage.ClickOnPopUpSearchField();
+        mainPage.FillPopUpSearcField("Basketball");
+        mainPage.ClickOnPopUpSearchButton();
+        mainPage.GetWait();
+        mainPage.CheckCaunterOfSearchResults();
+        mainPage.CheckValueofResultsInLegaues("basketball");
+        mainPage.ClickOnPopUpClearButton();
+        mainPage.GetWait();
+        mainPage.ClickOnPopUpSearchField();
+        mainPage.FillPopUpSearcField("Baseball");
+        mainPage.ClickOnPopUpSearchButton();
+        mainPage.GetWait();
+        mainPage.CheckCaunterOfSearchResults();
+        mainPage.CheckValueofResultsInLegaues("baseball");
     }
 
 

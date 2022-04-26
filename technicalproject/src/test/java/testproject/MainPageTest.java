@@ -1,9 +1,9 @@
 package testproject;
 
 import java.time.Duration;
-import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -12,11 +12,14 @@ public class MainPageTest {
     
     private WebDriver driver;
     private MainPage mainPage;
+    private ChromeOptions options;
 
 
     @BeforeMethod (description = "Для каждого теста запускаю юраузер и открываю странцу oppabet")
     public void setUp(){
-        driver = new ChromeDriver();
+        options = new ChromeOptions();
+        options.addArguments("--disable-notifications");
+        driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
         driver.get("https://www.oppabet.com/");
@@ -301,7 +304,27 @@ public class MainPageTest {
         mainPage.CheckValueofResultsInLegaues("baseball");
     }
 
+    @Test (description = "Проверить, что текст результата поиска кликабелен и ведет на соответсвующую страницу в табе MATCHES")
+    public void CheckTextOfSearchResultsisClickable(){
+        mainPage.enterRequest("Footbal");
+        mainPage.ClickButtonSearch();
+        mainPage.CheckTextofSearchResultsAreClickablaAndOpenCorrectPage();
+    }
 
+    @Test (description = "Проверить, что текст результата поиска кликабелен и ведет на соответсвующую страницу в табе MATCHES")
+    public void CheckCoefOfSearchResultsisClickable(){
+        mainPage.enterRequest("Footbal");
+        mainPage.ClickButtonSearch();
+        mainPage.CheckIcosOfCoefisClickable();
+    }
+
+    @Test (expectedExceptions = org.openqa.selenium.NoAlertPresentException.class, description = "Проверить, работу кнопки микрофон")
+    public void CheckMicrophoneButton(){
+        mainPage.enterRequest("Footbal");
+        mainPage.ClickButtonSearch();
+        mainPage.ClickOnPopUpMicrophoneButton();
+        mainPage.AlertDismiss();
+    }
 
 
 

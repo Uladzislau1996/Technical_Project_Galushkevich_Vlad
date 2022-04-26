@@ -1,11 +1,16 @@
 package testproject;
 
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.time.Duration;
+import java.util.List;
+import java.util.Random;
 
 import net.jodah.failsafe.internal.util.Assert;
 import org.openqa.selenium.JavascriptExecutor;
@@ -45,6 +50,7 @@ public class MainPage {
     private By PopUpCheckBoxNameLive = By.xpath("//*[@for='liveFilter']");
     private By PopUpCheckBoxNameSport = By.xpath("//*[@for='lineFilter']");
     private By PopUpCheckBoxNameExactMatch = By.xpath("//*[@for='accurateFilter']");
+    private By PopUpSearchResultsText = By.className("search-popup-event");
     private By SearchResults = By.className("search-popup-events__item");
     private By SearchResultsContent = By.className("search-popup-event__content");
     private By IconLiveinResults = By.className("search-popup-event__live");
@@ -57,9 +63,12 @@ public class MainPage {
     private By ValueOfCoef = By.className("search-popup-coef__value");
     private By PopUpMicrophoneButton = By.className("fa-microphone");
     private By MicrophoneAlertIcon = By.cssSelector(".swal2-popup>.swal2-header");
-    private By MicrophoneAlertContent = By.cssSelector("..swal2-popup>.swal2-content");
+    private By MicrophoneAlertContent = By.cssSelector(".swal2-popup>.swal2-content");
     private By MicrophoneAlertButton = By.cssSelector(".swal2-popup>.swal2-actions>.swal2-confirm");
     private By NoSurchResults = By.className("search-popup__nothing-find");
+    private By CoefIcon = By.className("search-popup-coef");
+    private By CoefIconCheck = By.className("c-bet-box__market");
+    
 
 
     
@@ -226,6 +235,8 @@ public class MainPage {
         return driver.findElement(NoSurchResults).isDisplayed();
     }
 
+    
+
 
 
     //ClickonTheWebElement
@@ -284,8 +295,23 @@ public class MainPage {
         return this;
      }
 
-     //GetSizeResults
+     public MainPage ClickOnPopUpMicrophoneButton(){
+        driver.findElement(PopUpMicrophoneButton).click();
+        return this;
+       // JavascriptExecutor js = (JavascriptExecutor)driver;
+       // WebElement button = driver.findElement(PopUpMicrophoneButton);
+        //js.executeScript("arguments[0].click();", button);
+        //return this;
+     }
 
+     public MainPage ClickOnMicrophoneAlertButton(){
+        JavascriptExecutor js = (JavascriptExecutor)driver;
+        WebElement button = driver.findElement(MicrophoneAlertButton);
+        js.executeScript("arguments[0].click();", button);
+        return this;
+     }
+
+     //Получить количество результатов
      public MainPage CheckCaunterOfSearchResults(){
         int SumofResult = driver.findElements(SearchResults).size();
         String Caunter = driver.findElement(PopUpCaunetr).getText();
@@ -296,9 +322,8 @@ public class MainPage {
         return this;
      }
 
-     //Get results value and compare it with request
-
-     public MainPage CheckValueofResults(String requset){
+     //Сравнить текст запроса и результатво
+    public MainPage CheckValueofResults(String requset){
         Assert.isTrue(driver.findElement(SearchResultsContentLeague).getText().toLowerCase().contains(requset)|driver.findElement(SearchResultsContentTeams).getText().toLowerCase().contains(requset), "incorrect results");
         return this;
      }
@@ -309,7 +334,7 @@ public class MainPage {
      }
 
      
-     //Проверяю что дефолтный каунтер равен 0
+     //Проверить что дефолтный каунтер равен 0
      public MainPage CheckCaunterOfSearchResultsWithInCorrectRequest(){
         String Caunter = driver.findElement(PopUpCaunetr).getText();
         int ResultsSum = Integer.valueOf(Caunter);
@@ -319,7 +344,7 @@ public class MainPage {
         return this;
      }
 
-     //Задаю ожидание в несколько секунд, для того чтобы данные поп-ап корректно подтягулись
+     //Ожидание в несколько секунд, для того чтобы данные поп-ап корректно подтягулись
      public MainPage GetWait(){
         try {
             Thread.sleep(3000);
@@ -328,6 +353,53 @@ public class MainPage {
         }
         return this;
      }
+
+     //Проверить, что текст в результате поиска кликабелен и вывожу значение элемента в консоль
+     public MainPage CheckTextofSearchResultsAreClickablaAndOpenCorrectPage(){
+        List<WebElement> Testresults = driver.findElements(PopUpSearchResultsText); 
+        List<WebElement> TextResults = driver.findElements(SearchResultsContentTeams);                          
+        int indexOfRandomElement = new Random().ints(0, Testresults.size()-1).findFirst().getAsInt();
+        String TextOfSearchResults = Testresults.get(indexOfRandomElement).getText().toLowerCase();
+        String string = TextResults.get(indexOfRandomElement).getText().toLowerCase().replaceAll("\\s","");
+        String TextofCheckResuts = string.replaceAll("-","");
+        String CheckLinkofTextResults = Testresults.get(indexOfRandomElement).getAttribute("href").toLowerCase().replaceAll("-","");
+        Testresults.get(indexOfRandomElement).click();
+        //System.out.println(TextOfSearchResults);
+        System.out.println(CheckLinkofTextResults);
+        System.out.println(TextofCheckResuts);
+        //Assert.isTrue((CheckLinkofTextResults.contains(TextofCheckResuts)), "incorrect results");
+        return this;
+     }
+
+     //Проверяю, что коэфиценты кликабельны в Табе "MATCHES"
+     public MainPage CheckIcosOfCoefisClickable(){
+        List<WebElement> CoefIcons = driver.findElements(CoefIcon);                              
+        int indexOfRandomElement = new Random().ints(0, CoefIcons.size()-1).findFirst().getAsInt();
+        String TextOfCoefIcons = CoefIcons.get(indexOfRandomElement).getText().toLowerCase();
+        char c = TextOfCoefIcons.charAt(0);
+        String Text = String.valueOf(c);
+        CoefIcons.get(indexOfRandomElement).click();
+        String CheckCoefIcons = driver.findElement(CoefIconCheck).getText().toLowerCase();
+        System.out.println(Text);
+        System.out.println(CheckCoefIcons);
+        Assert.isTrue((CheckCoefIcons.contains(Text)), "incorrect results");
+        return this;
+     }
+
+     public MainPage CheckThatAlertContainText(){
+         driver.findElement(MicrophoneAlertContent).getText().contains("To use voice input, please enable your microphone in your browser settings");
+         System.out.println(driver.findElement(MicrophoneAlertContent).getText());
+         return this;
+     }
+
+     public MainPage AlertDismiss(){
+        driver.switchTo().alert().dismiss();
+        return this;
+     }
+    
+    
+    
+    
 
 
 

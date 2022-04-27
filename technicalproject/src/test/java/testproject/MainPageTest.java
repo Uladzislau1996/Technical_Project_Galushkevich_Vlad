@@ -8,11 +8,13 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+
 public class MainPageTest {
     
     private WebDriver driver;
     private MainPage mainPage;
     private ChromeOptions options;
+
 
 
     @BeforeMethod (description = "Для каждого теста запускаю юраузер и открываю странцу oppabet")
@@ -24,7 +26,7 @@ public class MainPageTest {
         driver.manage().window().maximize();
         driver.get("https://www.oppabet.com/");
         mainPage = new MainPage(driver);
-    }
+   }
 
     @AfterMethod (description = "После каждого теста закрываю браузер")
     public void tearDown(){

@@ -71,27 +71,28 @@ public class MainPage {
     
 
 
-    
+    //Метод для ввода запроса в поле поиска на Главной
 
     public MainPage enterRequest(String request){
         driver.findElement(SearchFields1).sendKeys(request);
         return this;
     }
 
+    //Метод для ввода запроса в поле поиска в попап
+
     public MainPage FillPopUpSearcField(String request){
         driver.findElement(PopUpSearchField).sendKeys(request);
         return this;
     }
 
-
+    //Метода для клика по кнопке поиска на главной
 
     public MainPage ClickButtonSearch(){
        driver.findElement(SearchButtons1).click();
        return this;
     }
 
-
-    //CheckThatWebElemen
+    //Методы для проверки наличия элементов на странице
 
     public MainPage PopUpIsVisible(){
         driver.findElement(PopUpSearch).isDisplayed();
@@ -239,7 +240,7 @@ public class MainPage {
 
 
 
-    //ClickonTheWebElement
+    //Методы для клика по элементам
 
     public MainPage ClickPopUpTabMatches(){
         JavascriptExecutor js = (JavascriptExecutor)driver;
@@ -386,12 +387,15 @@ public class MainPage {
         return this;
      }
 
+    //Проверяю, что алерт сожержит корректный текст
      public MainPage CheckThatAlertContainText(){
          driver.findElement(MicrophoneAlertContent).getText().contains("To use voice input, please enable your microphone in your browser settings");
          System.out.println(driver.findElement(MicrophoneAlertContent).getText());
          return this;
      }
 
+     
+     //Переключаюсь на аллерт - отклонить
      public MainPage AlertDismiss(){
         driver.switchTo().alert().dismiss();
         return this;

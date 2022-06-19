@@ -1,35 +1,33 @@
 import org.apache.http.util.Asserts;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 
-import java.time.Duration;
 import java.util.List;
 
-public class Steps {
+public class
+PopUpSteps {
     private WebDriver driver;
     private MainPage mainPage;
     private PopUpPage popUpPage;
 
-    public Steps(WebDriver driver){
+    public PopUpSteps(WebDriver driver){
         this.driver = driver;
     }
 
     //Метод для проверик появления ПОПАП, после ввода запроса в поле поиска и нажатия на кнопку поиска
-    public Steps enterRequsetOnTheSearchFieldTest(String request){
+    public PopUpSteps enterRequsetOnTheSearchFieldTest(String request){
         MainPage mainPage = new MainPage(driver);
         mainPage.enterRequest(request);
         mainPage.clickButtonSearch();
-        Steps steps = new Steps(driver);
-        steps.getWait();
+        PopUpSteps popUpSteps = new PopUpSteps(driver);
+        popUpSteps.getWait();
         PopUpPage popUpPage = new PopUpPage(driver);
         popUpPage.isPopUpVisible();
         return this;
     }
 
     //Метод для проверики наличия "двух полей поиска" и "двух кнопок поиска" на главной
-    public Steps hasSearchFieldsAndButtonsSerachTest(){
+    public PopUpSteps hasSearchFieldsAndButtonsSerachTest(){
         MainPage mainPage = new MainPage(driver);
         mainPage.searchFiealdAreVisible();
         mainPage.searchButtonsAreVisible();
@@ -37,9 +35,9 @@ public class Steps {
     }
 
     //Метод для проверки, что Попап содержит все элементы, если открыт дефолтный таб "MATCHES"
-    public Steps haveAllWebElementsinPopUpTest(){
-        Steps steps = new Steps(driver);
-        steps.enterRequsetOnTheSearchFieldTest("football");
+    public PopUpSteps haveAllWebElementsinPopUpTest(){
+        PopUpSteps popUpSteps = new PopUpSteps(driver);
+        popUpSteps.enterRequsetOnTheSearchFieldTest("football");
         PopUpPage popUpPage = new PopUpPage(driver);
         popUpPage.isPopUpVisible();
         popUpPage.isPopUpTitleIsVisible();
@@ -67,10 +65,10 @@ public class Steps {
     }
 
     ////Метод для проверки, что Попап содержит все элементы, если открыт дефолтный таб "MATCHES"
-    public Steps hasAllWebElementsInPopUpTabLegauesTest(){
-        Steps steps = new Steps(driver);
-        steps.enterRequsetOnTheSearchFieldTest("football");
-        steps.getWait();
+    public PopUpSteps hasAllWebElementsInPopUpTabLegauesTest(){
+        PopUpSteps popUpSteps = new PopUpSteps(driver);
+        popUpSteps.enterRequsetOnTheSearchFieldTest("football");
+        popUpSteps.getWait();
         PopUpPage popUpPage = new PopUpPage(driver);
         popUpPage.clickPopUpTabLegues();
         popUpPage.isPopUpVisible();
@@ -95,9 +93,9 @@ public class Steps {
     }
 
     ////Метод для проверки, что Попап содержит все элементы, НО НЕ СОДЕРЖИТ ИКОНКИ КЭФОФ, если открыт дефолтный таб "Legaues"
-    public Steps notHaveIconsofCoefinPopUpLegauesTest(){
-        Steps steps = new Steps(driver);
-        steps.hasAllWebElementsInPopUpTabLegauesTest();
+    public PopUpSteps notHaveIconsofCoefinPopUpLegauesTest(){
+        PopUpSteps popUpSteps = new PopUpSteps(driver);
+        popUpSteps.hasAllWebElementsInPopUpTabLegauesTest();
         PopUpPage popUpPage = new PopUpPage(driver);
         popUpPage.popUpCoefeOneAreVisible();
         popUpPage.popUpCoefeTwoAreVisible();
@@ -107,210 +105,210 @@ public class Steps {
     }
 
     //Метод для проверки что каунтер соответсвую количесвту элементов в результате поиска, данные выводяться в консоль
-    public Steps checkPopUpCaunterTest(){
-        Steps steps = new Steps(driver);
-        steps.enterRequsetOnTheSearchFieldTest("football");
-        steps.getWait();
-        steps.checkCaunterOfSearchResults();
+    public PopUpSteps checkPopUpCaunterTest(){
+        PopUpSteps popUpSteps = new PopUpSteps(driver);
+        popUpSteps.enterRequsetOnTheSearchFieldTest("football");
+        popUpSteps.getWait();
+        popUpSteps.checkCaunterOfSearchResults();
         return this;
     }
 
     //"Проверяю, что в резултатах по запросу есть совпадение в тексте ТАБ MATCHES>блоке LEGUES")
-    public Steps checkPopUpResultsInTeamsTest(){
-        Steps steps = new Steps(driver);
-        steps.checkPopUpCaunterTest();
-        steps.checkValueofResults("football");
+    public PopUpSteps checkPopUpResultsInTeamsTest(){
+        PopUpSteps popUpSteps = new PopUpSteps(driver);
+        popUpSteps.checkPopUpCaunterTest();
+        popUpSteps.checkValueofResults("football");
         return this;
     }
 
     //"Проверяю, что в резултатах по запросу есть совпадение в тексте ТАБ MATCHES > блок TEAMS"
-    public Steps checkPopUpResultsInLeagueTest(){
-        Steps steps = new Steps(driver);
-        steps.enterRequsetOnTheSearchFieldTest("arsenal");
-        steps.checkValueofResults("arsenal");
+    public PopUpSteps checkPopUpResultsInLeagueTest(){
+        PopUpSteps popUpSteps = new PopUpSteps(driver);
+        popUpSteps.enterRequsetOnTheSearchFieldTest("arsenal");
+        popUpSteps.checkValueofResults("arsenal");
         return this;
     }
 
     //"Проверяю, что в резултатах по запросу есть совпадение в тексте в ТАБ Legues>блоке LAGUES")
-    public Steps checkPopUpResultsInLeguesTest(){
-        Steps steps = new Steps(driver);
-        steps.enterRequsetOnTheSearchFieldTest("Basketball");
+    public PopUpSteps checkPopUpResultsInLeguesTest(){
+        PopUpSteps popUpSteps = new PopUpSteps(driver);
+        popUpSteps.enterRequsetOnTheSearchFieldTest("Basketball");
         PopUpPage popUpPage = new PopUpPage(driver);
         popUpPage.clickPopUpTabLegues();
-        steps.getWait();
-        steps.checkValueofResultsInLegaues("basketball");
+        popUpSteps.getWait();
+        popUpSteps.checkValueofResultsInLegaues("basketball");
         return this;
     }
 
     //"Проверяю, что отображается заглушка если нет результатов в табе LEGUES/MATCHES" и каунтер равено нулю)
-    public Steps checkTextStubTest(){
-        Steps steps = new Steps(driver);
-        steps.enterRequsetOnTheSearchFieldTest("Test123QA");
-        steps.getWait();
-        steps.checkCaunterOfSearchResultsWithInCorrectRequest();
+    public PopUpSteps checkTextStubTest(){
+        PopUpSteps popUpSteps = new PopUpSteps(driver);
+        popUpSteps.enterRequsetOnTheSearchFieldTest("Test123QA");
+        popUpSteps.getWait();
+        popUpSteps.checkCaunterOfSearchResultsWithInCorrectRequest();
         PopUpPage popUpPage = new PopUpPage(driver);
         popUpPage.checkNoSurchResultsTextisVisible();
         popUpPage.clickPopUpTabLegues();
         popUpPage.checkNoSurchResultsTextisVisible();
-        steps.checkCaunterOfSearchResultsWithInCorrectRequest();
+        popUpSteps.checkCaunterOfSearchResultsWithInCorrectRequest();
         return this;
     }
 
     //"Проверяю, что при включенном чекбоксе 'Live' всегда отображается ячейка 'Live' напротив результатов")
-    public Steps checkLiveIconTest(){
-        Steps steps = new Steps(driver);
-        steps.enterRequsetOnTheSearchFieldTest("Football");
-        steps.getWait();
+    public PopUpSteps checkLiveIconTest(){
+        PopUpSteps popUpSteps = new PopUpSteps(driver);
+        popUpSteps.enterRequsetOnTheSearchFieldTest("Football");
+        popUpSteps.getWait();
         PopUpPage popUpPage = new PopUpPage(driver);
         popUpPage.popUpIconLiveinResultsAreVisible();
         popUpPage.clickPopUpTabLegues();
-        steps.getWait();
+        popUpSteps.getWait();
         popUpPage.popUpIconLiveinResultsAreVisible();
         return this;
     }
 
     //"Проверяю, что подтягиваются результаты поиска если включенны все чекбоксы 'Live/Sports/Exact match'
     // всегда отображается ячейка напротив результатов в табах MATCHES/LEGUES
-    public Steps checkResultsWithAllCheckBoxesTest(){
-        Steps steps = new Steps(driver);
-        steps.enterRequsetOnTheSearchFieldTest("Football");
+    public PopUpSteps checkResultsWithAllCheckBoxesTest(){
+        PopUpSteps popUpSteps = new PopUpSteps(driver);
+        popUpSteps.enterRequsetOnTheSearchFieldTest("Football");
         PopUpPage popUpPage = new PopUpPage(driver);
         popUpPage.clickCheckBoxExactMatch();
-        steps.checkValueofResults("footbal");
+        popUpSteps.checkValueofResults("footbal");
         popUpPage.popUpIconLiveinResultsAreVisible();
         popUpPage.clickPopUpTabLegues();
-        steps.checkValueofResultsInLegaues("footbal");
+        popUpSteps.checkValueofResultsInLegaues("footbal");
         popUpPage.popUpIconLiveinResultsAreVisible();
         return this;
     }
 
     //"Проверяю, что подтягиваются результаты поиска если включенны все чекбоксы 'Sports/Exact' в табах MATCHES/LEGUES
-    public Steps checkResultsWithSportandExactCheckBoxesTest(){
-        Steps steps = new Steps(driver);
-        steps.enterRequsetOnTheSearchFieldTest("Football");
+    public PopUpSteps checkResultsWithSportandExactCheckBoxesTest(){
+        PopUpSteps popUpSteps = new PopUpSteps(driver);
+        popUpSteps.enterRequsetOnTheSearchFieldTest("Football");
         PopUpPage popUpPage = new PopUpPage(driver);
         popUpPage.clickOnCheckBoxLive();
         popUpPage.clickCheckBoxExactMatch();
-        steps.getWait();
-        steps.checkCaunterOfSearchResults();
-        steps.checkValueofResults("football");
+        popUpSteps.getWait();
+        popUpSteps.checkCaunterOfSearchResults();
+        popUpSteps.checkValueofResults("football");
         popUpPage.clickPopUpTabLegues();
-        steps.getWait();
-        steps.checkCaunterOfSearchResults();
-        steps.checkValueofResultsInLegaues("footbal");
+        popUpSteps.getWait();
+        popUpSteps.checkCaunterOfSearchResults();
+        popUpSteps.checkValueofResultsInLegaues("footbal");
         return this;
     }
 
     //"Проверяю, работу кнопки удалить текст в табе MATCHES"
-    public Steps checkDeleteRequestButtonTest(){
-        Steps steps = new Steps(driver);
-        steps.enterRequsetOnTheSearchFieldTest("Football");
+    public PopUpSteps checkDeleteRequestButtonTest(){
+        PopUpSteps popUpSteps = new PopUpSteps(driver);
+        popUpSteps.enterRequsetOnTheSearchFieldTest("Football");
         PopUpPage popUpPage = new PopUpPage(driver);
-        steps.getWait();
+        popUpSteps.getWait();
         popUpPage.clickOnPopUpClearButton();
         popUpPage.clickOnPopUpSearchButton();
-        steps.getWait();
-        steps.checkCaunterOfSearchResultsWithInCorrectRequest();
+        popUpSteps.getWait();
+        popUpSteps.checkCaunterOfSearchResultsWithInCorrectRequest();
         popUpPage.checkNoSurchResultsTextisVisible();
         popUpPage.clickPopUpTabLegues();
-        steps.getWait();
-        steps.checkCaunterOfSearchResultsWithInCorrectRequest();
+        popUpSteps.getWait();
+        popUpSteps.checkCaunterOfSearchResultsWithInCorrectRequest();
         popUpPage.checkNoSurchResultsTextisVisible();
         return this;
     }
 
     //"Проверяю, работу кнопки удалить текст в табе LEGAUES"
-    public Steps checkDeleteRequestButtonLegauesTest(){
-        Steps steps = new Steps(driver);
-        steps.enterRequsetOnTheSearchFieldTest("Football");
+    public PopUpSteps checkDeleteRequestButtonLegauesTest(){
+        PopUpSteps popUpSteps = new PopUpSteps(driver);
+        popUpSteps.enterRequsetOnTheSearchFieldTest("Football");
         PopUpPage popUpPage = new PopUpPage(driver);
-        steps.getWait();
+        popUpSteps.getWait();
         popUpPage.clickPopUpTabLegues();
         popUpPage.clickOnPopUpClearButton();
         popUpPage.clickOnPopUpSearchButton();
-        steps.getWait();
-        steps.checkCaunterOfSearchResultsWithInCorrectRequest();
+        popUpSteps.getWait();
+        popUpSteps.checkCaunterOfSearchResultsWithInCorrectRequest();
         popUpPage.checkNoSurchResultsTextisVisible();
         return this;
     }
 
     //"Проверяю, работу кнопки поиска в PopUp в табе LEGAUES"
-    public Steps checkPopUpSearcButtonTest(){
-        Steps steps = new Steps(driver);
-        steps.enterRequsetOnTheSearchFieldTest("Football");
+    public PopUpSteps checkPopUpSearcButtonTest(){
+        PopUpSteps popUpSteps = new PopUpSteps(driver);
+        popUpSteps.enterRequsetOnTheSearchFieldTest("Football");
         PopUpPage popUpPage = new PopUpPage(driver);
-        steps.getWait();
+        popUpSteps.getWait();
         popUpPage.clickOnPopUpClearButton();
-        steps.getWait();
+        popUpSteps.getWait();
         popUpPage.ClickOnPopUpSearchField();
-        steps.fillPopUpSearcField("Basketball");
+        popUpSteps.fillPopUpSearcField("Basketball");
         popUpPage.clickOnPopUpSearchButton();
-        steps.getWait();
-        steps.checkCaunterOfSearchResults();
-        steps.checkValueofResults("basketball");
-        steps.getWait();
+        popUpSteps.getWait();
+        popUpSteps.checkCaunterOfSearchResults();
+        popUpSteps.checkValueofResults("basketball");
+        popUpSteps.getWait();
         popUpPage.clickOnPopUpClearButton();
-        steps.fillPopUpSearcField("Baseball");
+        popUpSteps.fillPopUpSearcField("Baseball");
         popUpPage.clickOnPopUpSearchButton();
-        steps.getWait();
-        steps.checkCaunterOfSearchResults();
-        steps.checkValueofResults("baseball");
+        popUpSteps.getWait();
+        popUpSteps.checkCaunterOfSearchResults();
+        popUpSteps.checkValueofResults("baseball");
         return this;
     }
 
     ////"Проверяю, работу кнопки удалить текст в табе LEGAUES")
-    public Steps checkPopUpSearcButtonDeleteLegauesTest(){
-        Steps steps = new Steps(driver);
-        steps.enterRequsetOnTheSearchFieldTest("Football");
+    public PopUpSteps checkPopUpSearcButtonDeleteLegauesTest(){
+        PopUpSteps popUpSteps = new PopUpSteps(driver);
+        popUpSteps.enterRequsetOnTheSearchFieldTest("Football");
         PopUpPage popUpPage = new PopUpPage(driver);
         popUpPage.clickPopUpTabLegues();
         popUpPage.clickOnPopUpClearButton();
-        steps.getWait();
+        popUpSteps.getWait();
         popUpPage.ClickOnPopUpSearchField();
-        steps.fillPopUpSearcField("Basketball");
+        popUpSteps.fillPopUpSearcField("Basketball");
         popUpPage.clickOnPopUpSearchButton();
-        steps.getWait();
-        steps.checkCaunterOfSearchResults();
-        steps.checkValueofResultsInLegaues("basketball");
+        popUpSteps.getWait();
+        popUpSteps.checkCaunterOfSearchResults();
+        popUpSteps.checkValueofResultsInLegaues("basketball");
         popUpPage.clickOnPopUpClearButton();
-        steps.getWait();
+        popUpSteps.getWait();
         popUpPage.ClickOnPopUpSearchField();
-        steps.fillPopUpSearcField("Baseball");
+        popUpSteps.fillPopUpSearcField("Baseball");
         popUpPage.clickOnPopUpSearchButton();
-        steps.getWait();
-        steps.checkCaunterOfSearchResults();
-        steps.checkValueofResultsInLegaues("baseball");
+        popUpSteps.getWait();
+        popUpSteps.checkCaunterOfSearchResults();
+        popUpSteps.checkValueofResultsInLegaues("baseball");
         return this;
     }
 
     //Метод проверки, что текст результата поиска кликабелен и ведет на соответсвующую страницу в табе MATCHES")
-    public Steps checkTextOfSearchResultsHasCorrectLink(){
-        Steps steps = new Steps(driver);
-        steps.enterRequsetOnTheSearchFieldTest("Football");
-        steps.checkTextofSearchResultHasCorrectLink();
+    public PopUpSteps checkTextOfSearchResultsHasCorrectLink(){
+        PopUpSteps popUpSteps = new PopUpSteps(driver);
+        popUpSteps.enterRequsetOnTheSearchFieldTest("Football");
+        popUpSteps.checkTextofSearchResultHasCorrectLink();
         return this;
     }
 
     //"Проверить, что коэфе кликабельны)
-    public Steps checkCoefOfSearchResultsisClickable(){
-        Steps steps = new Steps(driver);
-        steps.enterRequsetOnTheSearchFieldTest("Football");
-        steps.checkIconsOfCoefisClickable();
+    public PopUpSteps checkCoefOfSearchResultsisClickable(){
+        PopUpSteps popUpSteps = new PopUpSteps(driver);
+        popUpSteps.enterRequsetOnTheSearchFieldTest("Football");
+        popUpSteps.checkIconsOfCoefisClickable();
         return this;
     }
 
-    public Steps checkMicrophoneButton(){
+    public PopUpSteps checkMicrophoneButton(){
         PopUpPage popUpPage = new PopUpPage(driver);
-        Steps steps = new Steps(driver);
-        steps.enterRequsetOnTheSearchFieldTest("Football");
-        steps.clickOnPopUpMicrophoneButton();
-        steps.alertDismiss();
+        PopUpSteps popUpSteps = new PopUpSteps(driver);
+        popUpSteps.enterRequsetOnTheSearchFieldTest("Football");
+        popUpSteps.clickOnPopUpMicrophoneButton();
+        popUpSteps.alertDismiss();
         return this;
     }
 
     //Вся логика в степах
 
-    public Steps checkCaunterOfSearchResults(){
+    public PopUpSteps checkCaunterOfSearchResults(){
         PopUpPage popUpPage = new PopUpPage(driver);
         int SumofResult = driver.findElements(popUpPage.searchResults).size();
         String Caunter = driver.findElement(popUpPage.popUpCaunetr).getText();
@@ -321,7 +319,7 @@ public class Steps {
         return this;
     }
 
-    public Steps checkValueofResults(String requset){
+    public PopUpSteps checkValueofResults(String requset){
         PopUpPage popUpPage = new PopUpPage(driver);
         Asserts.check(driver.findElement(popUpPage.searchResultsContentLeague).getText().toLowerCase()
                         .contains(requset)|
@@ -330,14 +328,14 @@ public class Steps {
         return this;
     }
 
-    public Steps checkValueofResultsInLegaues(String requset){
+    public PopUpSteps checkValueofResultsInLegaues(String requset){
         PopUpPage popUpPage = new PopUpPage(driver);
         Asserts.check(driver.findElement(popUpPage.searchResultsContentLeague).getText().toLowerCase().contains(requset),
                 "incorrect results");
         return this;
     }
 
-    public Steps checkCaunterOfSearchResultsWithInCorrectRequest(){
+    public PopUpSteps checkCaunterOfSearchResultsWithInCorrectRequest(){
         PopUpPage popUpPage = new PopUpPage(driver);
         String Caunter = driver.findElement(popUpPage.popUpCaunetr).getText();
         int ResultsSum = Integer.valueOf(Caunter);
@@ -347,7 +345,7 @@ public class Steps {
         return this;
     }
 
-    public Steps getWait(){
+    public PopUpSteps getWait(){
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
@@ -356,13 +354,13 @@ public class Steps {
         return this;
     }
 
-    public Steps fillPopUpSearcField(String request){
+    public PopUpSteps fillPopUpSearcField(String request){
         PopUpPage popUpPage = new PopUpPage(driver);
         driver.findElement(popUpPage.popUpSearchField).sendKeys(request);
         return this;
     }
 
-    public Steps checkTextofSearchResultHasCorrectLink(){
+    public PopUpSteps checkTextofSearchResultHasCorrectLink(){
         PopUpPage popUpPage = new PopUpPage(driver);
         List<WebElement> Testresults = driver.findElements(popUpPage.popUpSearchResultsText);
         List<WebElement> TextResults = driver.findElements(popUpPage.searchResultsContentTeams);
@@ -382,7 +380,7 @@ public class Steps {
         return this;
     }
 
-    public Steps checkIconsOfCoefisClickable(){
+    public PopUpSteps checkIconsOfCoefisClickable(){
         PopUpPage popUpPage = new PopUpPage(driver);
         List<WebElement> CoefIcons = driver.findElements(popUpPage.coefIcon);
         double index = Math.random() * (CoefIcons.size()-1);
@@ -398,13 +396,13 @@ public class Steps {
         return this;
     }
 
-    public Steps clickOnPopUpMicrophoneButton(){
+    public PopUpSteps clickOnPopUpMicrophoneButton(){
         PopUpPage popUpPage = new PopUpPage(driver);
         driver.findElement(popUpPage.popUpMicrophoneButton).click();
         return this;
     }
 
-    public Steps  alertDismiss(){
+    public PopUpSteps alertDismiss(){
         driver.switchTo().alert().dismiss();
         return this;
     }
